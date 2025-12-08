@@ -163,3 +163,21 @@ class Decoder(nn.Module):
         for layer in self.layers:
             x = layer(x, encoder_output, src_mask, tgt_mask)
         return self.norm(x)
+    
+class ProjectionLayer(nn.Module):
+    def __init__(self, d_model, vocab_size)->None:
+        super().__init__()
+        self.proj = nn.Linear(d_model, vocab_size)
+    
+    def forward(self, x):
+        return torch.log_softmax(self.proj(x), dim = -1)
+    
+class Transformer(nn.Module):
+    def __init__(self, encoder : Encoder, decoder: Decoder, src_embed: InputEmbeddings, tgt_embed: InputEmbeddings, src_pos: PositionalEncoding, tgt_pos: PositionalEncoding, projection_layer: ProjectionLayer)->None:
+        super().__init__()
+        self.encoder = encoder
+        self.decoder = decoder
+        self.src_embed = src_embed
+        self.tgt_embed = tgt_embed
+        self.src_pos = src_pos
+        self.tgt_pos = tgt_pos
