@@ -15,11 +15,15 @@ class InputEmbeddings(nn.Module):
 
 class PositionalEncoding(nn.Module):
     
-    def __init__(self, d_model:int, seq_length:int, droput: float) -> None:    
+    def __init__(self, d_model:int, seq_length:int, dropout: float) -> None:    
         super().__init__()
+
+
         self.d_model = d_model
         self.seq_length = seq_length
-        self.dropout = nn.Dropout(droput)
+        self.dropout = nn.Dropout(dropout)
+
+
 
         #matrix of shape (seq_len, d_model)
         pe = torch.zeros(seq_length, d_model)
@@ -181,3 +185,32 @@ class Transformer(nn.Module):
         self.tgt_embed = tgt_embed
         self.src_pos = src_pos
         self.tgt_pos = tgt_pos
+        self.projection_layer = projection_layer
+
+    def encode(self, src, src_mask):
+        src = self.src_embed(src)
+        src = self.src_pos(src)
+        return self.encoder(src, src_mask)
+    
+    def decode(self, encoder_output, src_mask, tgt, tgt_mask):
+        tgt = self.tgt_embed(tgt)
+        tgt = self.tgt_pos(tgt)
+        return self.decoder(tgt, encoder_output, src_mask, tgt_mask)
+    
+    def project(self, x):
+        return self.projection_layer(x)
+    
+#func to build trans for translation task
+def build_transformer(src_vocab_size, tgt_vocab_size, src_seq_len, tgt_seq_len, d_model:int=512, N:int=6, h:int=8, dropout:float=0.1, d_ff:int=2048):
+    #create the embedd layers
+    src_embed = InputEmbeddings(d_model, src_vocab_size)
+    tgt_embed = InputEmbeddings(d_model, tgt_vocab_size)
+
+    #create positional encoding layer
+    src_pos = PositionalEncoding(d_model, src_seq_len, dropout)
+    tgt_pos = PositionalEncoding(d_model, tgt_seq_len, dropout)
+
+    #Create encoder block
+    encoder_block = []
+    for _ in range(N):
+        encoder_self_attention_block = MultiHeadAttentionBlock(d_model, h, dropout)
