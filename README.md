@@ -3,7 +3,7 @@ Transformer Implementation (from Scratch)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/[YOUR_USERNAME]/Attention-is-all-you-need-implementation-/blob/main/notebook.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aprv10/Attention-is-all-you-need-implementation-/blob/main/notebook.ipynb)
 
 A complete, ground-up implementation of the Transformer architecture as proposed in the paper **["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)**. 
 
