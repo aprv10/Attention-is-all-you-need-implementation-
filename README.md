@@ -1,4 +1,4 @@
-23 Transformer Implementation (from Scratch)
+Transformer Implementation (from Scratch)
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)](https://www.python.org/)
