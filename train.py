@@ -14,7 +14,7 @@ from config import get_weights_file_path, get_config
 
 from torch.utils.tensorboard import SummaryWriter
 from pathlib import Path
-import tqdm
+from tqdm import tqdm
 import warnings
 
 def greedy_decode(model, source, source_mask, tokenizer_src, tokenizer_tgt, max_len, device):
