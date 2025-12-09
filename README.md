@@ -33,7 +33,7 @@ The implementation details include:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/[YOUR_USERNAME]/Attention-is-all-you-need-implementation-.git
+git clone https://github.com/aprv10/Attention-is-all-you-need-implementation-.git
 cd Attention-is-all-you-need-implementation-
 ```
 
