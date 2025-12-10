@@ -102,7 +102,7 @@ class MultiHeadAttentionBlock(nn.Module):
         #(batch, seqlen, h, dk) -> (batch, h, seqlen, dk)
         query = query.view(query.shape[0],query.shape[1], self.h, self.d_k).transpose(1,2)
         key = key.view(key.shape[0], key.shape[1], self.h, self.d_k).transpose(1,2)
-        value = value.view(key.shape[0], key.shape[1], self.h, self.d_k).transpose(1,2)
+        value = value.view(value.shape[0], value.shape[1], self.h, self.d_k).transpose(1,2)
 
         x, self.attention_scores = MultiHeadAttentionBlock.attention(query, key, value, mask, self.dropout)
 
@@ -140,7 +140,7 @@ class Encoder(nn.Module):
 
     def forward(self, x, mask):
         for layer in self.layers:
-            x = (layer, mask)
+            x = layer(x, mask)
         return self.norm(x)
     
 class DecoderBlock(nn.Module):
